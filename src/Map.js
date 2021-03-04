@@ -9,13 +9,10 @@ const MapCom = () => {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var lat = position.coords.latitude, // 위도
                     lon = position.coords.longitude; // 경도
-                    console.log(lat, lon);
-                setTimeout(createMap, 1000, lat, lon, container);
+                createMap(lat, lon, container);
             });
         } else {
-            var lat = '37.57598282289137';
-            var lon = '126.97680910426234';
-            setTimeout(createMap, 1000, lat, lon, container);
+            alert("지도 위치 확인을 허용해주세요!");
         }
     };
 
@@ -24,35 +21,36 @@ const MapCom = () => {
             center: new kakao.maps.LatLng(lat, lon), //지도의 중심좌표.
             level: 4 //지도의 레벨(확대, 축소 정도)
         };
-        console.log('createOptions:',options);
-        const map = () => { //지도 생성 및 객체 리턴
+        const map = setTimeout(() => { //지도 생성 및 객체 리턴
             new kakao.maps.Map(container, options);
-        };
-        // const center = {
-        //     lat : lat, lon : lon
-        // };
-        // const circle = () => {
-        //     new kakao.maps.Circle({
-        //         center : center,  // 원의 중심좌표 입니다 
-        //         radius: 1000, // 미터 단위의 원의 반지름입니다 
-        //         strokeWeight: 5, // 선의 두께입니다 
-        //         strokeColor: '#75B8FA', // 선의 색깔입니다
-        //         strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-        //         strokeStyle: 'dashed', // 선의 스타일 입니다
-        //         fillColor: '#CFE7FF', // 채우기 색깔입니다
-        //         fillOpacity: 0.7  // 채우기 불투명도 입니다   
-        //     });
-        // };
-        // setTimeout(circle.setMap(map), 1000); 
+        }, 1000);
+
+        getDistance(lat, lon);
     };
+
+    const getDistance = (lat, lon) => {
+        // var otherLat = document.getElementById('').val();
+        // var otherLon = document.getElementById('').val();
+        var polyline = new kakao.maps.Polyline({
+            path : [
+                new kakao.maps.LatLng(lat, lon),
+                //new kakao.maps.LatLng(otherLat, otherLon)
+                new kakao.maps.LatLng(36.365243, 127.436007)
+            ]
+        });
+        console.log('polyline.getLength():', polyline.getLength());
+        return polyline.getLength();
+        // 내 위치에서 1km 반경에 있는 사람들의 글만 보이게
+    }
 
     useEffect(() => {
         getContainer();
-        //map.setCenter(locPosition); 
     }, []);
 
     return(
         <div className="popup">
+            <input type="hidden" name="otherLat" id="otherLat" />
+            <input type="hidden" name="otherLon" id="otherLon" />
             <div id="map" style={{width:400, height:400}} />
         </div>
     )
