@@ -1,7 +1,13 @@
 import React, {useEffect, Component, useState} from "react";
-const {kakao} = window;
+import {mapApi} from "./api";
+const getApi = async() => {
+    const api = await mapApi();
+    const {kakao} = window;
+    return kakao;
+}
 
 const MapCom = () => {
+    const [kao, setKao] = useState("");
     const [mapping, isMapping] = useState(true);
     const getContainer = async () => {
         const container = await document.getElementById("map");
@@ -29,12 +35,9 @@ const MapCom = () => {
     };
 
     const getDistance = (lat, lon) => {
-        // var otherLat = document.getElementById('').val();
-        // var otherLon = document.getElementById('').val();
         var polyline = new kakao.maps.Polyline({
             path : [
                 new kakao.maps.LatLng(lat, lon),
-                //new kakao.maps.LatLng(otherLat, otherLon)
                 new kakao.maps.LatLng(36.365243, 127.436007)
             ]
         });
