@@ -1,23 +1,21 @@
 import { render } from "@testing-library/react";
-import React from "react";
+import React, {useState} from "react";
 import {weatherApi} from "./api";
 
-const Weather = () => {
+const Weather = async ({coords}) => {
+    console.log('coords:',coords);
     // 위도 경도 apiKey 보내기
-    const getWeather = async () => {
-        console.log('navigator:', navigator.geolocation);
-        navigator.geolocation.getCurrentPosition((position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            console.log('lat:',lat, 'lon:',lon);
-        });
-        // console.log('lat:',lat, 'lon:',lon);
-        // const {main : {temp}} = await weatherApi(lat, lon, API_KEY);
-        // console.log('temp:', temp);
+    const [weather, setWeather] = useState(false);
+    const [temps, setTemps] = useState(false);
+    setWeather(true);
+    const {main : {temp}} = await weatherApi(coords.lat, coords.lon);
+    console.log('temp:', temp);
+    setTemps(true);
 
-    }
     return (
-        <span>The weather is like</span>
+        <>
+            {setWeather ? `The weather is like` : `can't access the temperature`};
+        </>
     )
 }
 

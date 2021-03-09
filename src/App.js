@@ -4,13 +4,12 @@ import MapCom from "./Map";
 import Weather from "./Weather";
 
 function App() {
-  const [coords, setCoords] = useState("");
+  const [coords, setCoords] = useState(null);
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-        var lat = position.coords.latitude, // 위도
-            lon = position.coords.longitude; // 경도
       setCoords({
-        lat, lon
+        lat : position.coords.latitude,
+        lon : position.coords.longitude
       });
     });
   } else {
@@ -19,8 +18,7 @@ function App() {
   return (
     <div className="App">
       <MapCom />
-      {/* <MapCom lat={this.coords} lon={this.coords.lon} /> */}
-      <Weather lat={coords.lat} lon={coords.lon} />
+      <Weather coords={coords} />
     </div>
   );
 }

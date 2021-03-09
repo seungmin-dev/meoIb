@@ -1,10 +1,6 @@
 import React, {useEffect, Component, useState} from "react";
 import {mapApi} from "./api";
-const getApi = async() => {
-    const api = await mapApi();
-    const {kakao} = window;
-    return kakao;
-}
+const {kakao} = window;
 
 const MapCom = () => {
     const [kao, setKao] = useState("");

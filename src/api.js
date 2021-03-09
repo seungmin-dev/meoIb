@@ -6,4 +6,3 @@ const api = axios.create({
 });
 
 export const weatherApi = (lat, lon, API_KEY) => api.get(`/lat=${lat}&lon=${lon}&API_KEY=${API_KEY}&units=metric`);
-export const mapApi = () => (`//dapi.kakao.com/v2/maps/sdk.js?appkey=7653fd2ea6748803f7dfc53a8730f124`);
