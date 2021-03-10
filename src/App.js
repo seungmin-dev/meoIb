@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import React, {useEffect, useState} from "react";
 import MapCom from "./Map";
 import Weather from "./Weather";
+import Board from "./Board";
 
 function App() {
   const [coords, setCoords] = useState("");
@@ -23,13 +24,6 @@ function App() {
     setCoords({yn : false});
   }
   useEffect(() => {
-    // if (navigator.geolocation) {
-    //   // navigator.geolocation.getCurrentPosition(success, error, options);
-      
-    // } 
-    // else {
-    //   alert("지도 위치 확인을 허용해주세요!");
-    // }
     navigator.geolocation.getCurrentPosition((position) => {
       if( position) {
         setCoords({
@@ -47,6 +41,7 @@ function App() {
       <>
       <MapCom />
       {init ?  <Weather coords={coords} /> : "Can't access geolocation"}
+      <Board />
       </>
     </div>
   );

@@ -6,7 +6,6 @@ const Weather = ({coords}) => {
     // 위도 경도 apiKey 보내기
     const [api, getApi] = useState(false);
     const [weatherObj, setWeatherObj] = useState(null);
-    //const {main : {temp}} = await weatherApi(coords.lat, coords.lon);
     const getWeather = async () => {
         const {data} = await weatherApi(coords.lat, coords.lon);
         setWeatherObj({
