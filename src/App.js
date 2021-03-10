@@ -39,7 +39,7 @@ function App() {
       } else {
         setCoords(null);
       }
-      // setInit(true);
+      setInit(true);
     });
   }, []);
   return (
