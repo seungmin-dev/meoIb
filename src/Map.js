@@ -1,21 +1,10 @@
-import React, {useEffect, Component, useState} from "react";
-import {mapApi} from "./api";
+import React, {useEffect} from "react";
 const {kakao} = window;
 
-const MapCom = () => {
-    const [kao, setKao] = useState("");
-    const [mapping, isMapping] = useState(true);
+const MapCom = ({coords}) => {
     const getContainer = async () => {
         const container = await document.getElementById("map");
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude, // 위도
-                    lon = position.coords.longitude; // 경도
-                createMap(lat, lon, container);
-            });
-        } else {
-            alert("지도 위치 확인을 허용해주세요!");
-        }
+        createMap(coords.lat, coords.lon, container);
     };
 
     const createMap = (lat, lon, container) => {
