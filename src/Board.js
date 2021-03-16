@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react"
 import {dbService} from "./fbase";
 import Create from "./Create";
+import Content from "./Content";
+import {userIpApi} from "./api";
 
-const Board = ({}) => {
+const Board = ({coords}) => {
     const [content, setContent] = useState([]);
     const [ip, setIp] = useState("");
     function json(url) {
@@ -14,7 +16,7 @@ const Board = ({}) => {
     useEffect(() => {
         dbService.collection("ㅁㅇㅇㅇ").onSnapshot((snapshot) => {
             const contentArr = snapshot.docs.map((doc) => ({
-                timestamp: doc.timestamp,
+                randomId: doc.randomId,
                 ...doc.data()
             }));
             setContent(contentArr);
@@ -23,9 +25,10 @@ const Board = ({}) => {
     return (
         <div className="container">
             <div sytle={{marginTop : 30}}>
-                {/* {content.map(content => 
-                    <Sweet key={content.id} contentArr={content} isOwner={content.ip === ip} />
-                )} */}
+                <Create coords={coords} ip={ip} />
+                {content.map(contentArr => 
+                    <Content key={contentArr.randomId} contentArr={contentArr} isOwner={contentArr.ip === ip} />
+                )}
                 <span></span>
             </div>
         </div>
