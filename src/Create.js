@@ -37,7 +37,7 @@ const Create = ({coords, ip}) => {
         }
         console.log('contentObj:', contentObj);
 
-        await dbService.collection("ㅁㅇㅇㅇ").add(contentObj);
+        await dbService.collection("ㅁㅇㅇㅇ").add(contentObj).then((docRef) => {console.log('docRef id:', docRef.id)});
         setContent("");
     }
     const onChange = async (event) => {
