@@ -16,7 +16,7 @@ const Board = ({coords}) => {
     useEffect(() => {
         dbService.collection("ㅁㅇㅇㅇ").onSnapshot((snapshot) => {
             const contentArr = snapshot.docs.map((doc) => ({
-                randomId: doc.randomId,
+                id: doc.id,
                 ...doc.data()
             }));
             setContent(contentArr);
@@ -27,7 +27,7 @@ const Board = ({coords}) => {
             <div sytle={{marginTop : 30}}>
                 <Create coords={coords} ip={ip} />
                 {content.map(contentArr => 
-                    <Content key={contentArr.randomId} contentArr={contentArr} isOwner={contentArr.ip === ip} />
+                    <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.ip === ip} />
                 )}
                 <span></span>
             </div>

@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import { dbService, storageService } from "./fbase";
+import Report from "./Report";
 
 const Content = ({key, contentArr, isOwner}) => {
     const [editting, setEditting] = useState(false);
     const [newContent, setNewContent] = useState(contentArr.content);
+    const [report, setReport] = useState(false);
     let d = new Date();
     let day = d.getDay();
     let dayKor = "";
@@ -21,17 +23,19 @@ const Content = ({key, contentArr, isOwner}) => {
     const toggleEdit = () => setEditting((prev) => !prev);
     const onSubmit = async (event) => {
         event.preventDefault();
-        console.log({...contentArr});
         await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).update({
             content : newContent
         });
         setEditting(false);
     }
-    const DeleteContent = () => {
-
+    const DeleteContent = async () => {
+        const confirm = window.confirm("정말 이 글을 삭제하시겠어요?");
+        if(confirm) {
+            await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).delete()
+        }
     }
     const ReportContent = () => {
-        
+        setReport(true);
     }
     return (
         <>
@@ -50,6 +54,7 @@ const Content = ({key, contentArr, isOwner}) => {
                     {isOwner ? <><button onClick={toggleEdit}>수정</button><button onClick={DeleteContent}>삭제</button></> : <button onClick={ReportContent}>신고</button>}<br/>
                     <span>{dayKor}{contentArr.time}</span><br/>
                     <span>{contentArr.content}</span>
+                    {report ? <Report report={report} /> : ""}
                 </div>
             }
         </>
