@@ -34,7 +34,7 @@ const Content = ({key, contentArr, isOwner}) => {
             await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).delete()
         }
     }
-    const ReportContent = () => {
+    const toggleReport = () => {
         setReport(true);
     }
     return (
@@ -51,7 +51,7 @@ const Content = ({key, contentArr, isOwner}) => {
             :
                 <div className="contentBox">
                     <span>랜선친구 {contentArr.randomId}</span>
-                    {isOwner ? <><button onClick={toggleEdit}>수정</button><button onClick={DeleteContent}>삭제</button></> : <button onClick={ReportContent}>신고</button>}<br/>
+                    {isOwner ? <><button onClick={toggleEdit}>수정</button><button onClick={DeleteContent}>삭제</button></> : <button onClick={toggleReport}>신고</button>}<br/>
                     <span>{dayKor}{contentArr.time}</span><br/>
                     <span>{contentArr.content}</span>
                     {report ? <Report report={report} /> : ""}
