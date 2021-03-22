@@ -26,8 +26,6 @@ function App() {
       <>
       {init ?  <MapCom coords={coords} /> : "Can't access geolocation"}
       {init ?  <Weather coords={coords} /> : "Can't access geolocation"}
-      {/* {init ?  <Create coords={coords} /> : "Can't access geolocation"} */}
-      {/* <Ip /> */}
       {init ?  <Board coords={coords} /> : "Can't access geolocation"}
       </>
     </div>

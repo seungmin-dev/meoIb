@@ -39,7 +39,7 @@ const MapCom = ({coords}) => {
         <div className="popup">
             <input type="hidden" name="otherLat" id="otherLat" />
             <input type="hidden" name="otherLon" id="otherLon" />
-            <div id="map" style={{width:400, height:400}} />
+            <div id="map" style={{width:400, height:400, display:"none"}} />
         </div>
     )
 };

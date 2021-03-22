@@ -11,7 +11,8 @@ const Weather = ({coords}) => {
             regieon : data.name,
             temp : data.main.temp,
             feels_like : data.main.feels_like,
-            weather : data.weather[0].main
+            weather : data.weather[0].main,
+            icon : data.weather[0].icon
         });
         getApi(true);
     }
@@ -20,7 +21,11 @@ const Weather = ({coords}) => {
     }, []);
     return (
         <>
-            {api ? <span>현재 위치 {weatherObj.regieon}의 기온은 {weatherObj.temp}˚C, 체감은 {weatherObj.feels_like}˚C, 날씨는 {weatherObj.weather}입니다!</span> : "Can't get the weather"}
+        {api ? 
+            (
+                <><div className="weather_icon_box"><img className="weather_icon" src={`http://openweathermap.org/img/w/${weatherObj.icon}.png`} alt="날씨 아이콘" /></div>
+                <span>현재 위치 {weatherObj.regieon}의 기온은 {weatherObj.temp}˚C, 체감은 {weatherObj.feels_like}˚C, 날씨는 {weatherObj.weather}입니다!</span></>
+            ) : "Can't get the weather"}
         </>
     )
 }
