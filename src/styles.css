@@ -16,6 +16,7 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   color: white;
+  display: flex;
 }
 
 button {
@@ -30,4 +31,31 @@ a {
 
 form {
   width: 100%;
+}
+
+.logo {
+  background-color: #fff;
+  width: 80px;
+  height: 50px;
+  float: left;
+}
+
+.weather_box {
+  width: 30%;
+  height: 80px;
+  float: right;
+}
+
+.weather_icon_box {
+  width: 60px;
+  height: 60px;
+  float: right;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 60vw;
+  height: 70vh;
+  background-color: #999;
 }

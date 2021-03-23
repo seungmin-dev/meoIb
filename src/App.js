@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import MapCom from "./Map";
 import Weather from "./Weather";
-import Create from "./Create";
-import Ip from "./Ip";
 import Board from "./Board";
+import Basictool from "./Basictool";
 
 function App() {
   const [coords, setCoords] = useState("");
@@ -24,6 +23,7 @@ function App() {
   return (
     <div className="App">
       <>
+      <Basictool />
       {init ?  <MapCom coords={coords} /> : "Can't access geolocation"}
       {init ?  <Weather coords={coords} /> : "Can't access geolocation"}
       {init ?  <Board coords={coords} /> : "Can't access geolocation"}

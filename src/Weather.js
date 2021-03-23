@@ -23,9 +23,21 @@ const Weather = ({coords}) => {
         <>
         {api ? 
             (
-                <><div className="weather_icon_box"><img className="weather_icon" src={`http://openweathermap.org/img/w/${weatherObj.icon}.png`} alt="날씨 아이콘" /></div>
-                <span>현재 위치 {weatherObj.regieon}의 기온은 {weatherObj.temp}˚C, 체감은 {weatherObj.feels_like}˚C, 날씨는 {weatherObj.weather}입니다!</span></>
-            ) : "Can't get the weather"}
+                <>
+                    <div className="weather_box">
+                        <div className="weather_icon_box">
+                            <img className="weather_icon" src={`http://openweathermap.org/img/w/${weatherObj.icon}.png`} alt="날씨 아이콘" />
+                        </div>
+                        <p>현재 위치-{weatherObj.regieon}</p>
+                        <p>기온-{weatherObj.temp}˚C</p>
+                        <p>체감-{weatherObj.feels_like}˚C</p>
+                        {/* <p>날씨-{weatherObj.weather}</p> */}
+                    </div>
+                </>
+            ) 
+            : 
+            "Can't get the weather"
+        }
         </>
     )
 }

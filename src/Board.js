@@ -7,6 +7,12 @@ import {userIpApi} from "./api";
 const Board = ({coords}) => {
     const [content, setContent] = useState([]);
     const [ip, setIp] = useState("");
+    const [creating, setCreating] = useState(false);
+    let btnCreateValue = "알려주기";
+    const onClickCreate = (event) => {
+        setCreating(true);
+        btnCreateValue = "";
+    }
     function json(url) {
         return fetch(url).then(res => res.json());
     }
@@ -25,7 +31,8 @@ const Board = ({coords}) => {
     return (
         <div className="container">
             <div sytle={{marginTop : 30}}>
-                <Create coords={coords} ip={ip} />
+                <span onClick={onClickCreate} id="btnCreate">{btnCreateValue}</span>
+                {creating ? <Create coords={coords} ip={ip} /> : "" }
                 {content.map(contentArr => 
                     <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.ip === ip} />
                 )}
