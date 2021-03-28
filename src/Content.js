@@ -50,10 +50,19 @@ const Content = ({key, contentArr, isOwner}) => {
                 )
             :
                 <div className="contentBox">
-                    <span>랜선친구 {contentArr.randomId}</span>
-                    {isOwner ? <><button onClick={toggleEdit}>수정</button><button onClick={DeleteContent}>삭제</button></> : <button onClick={toggleReport}>신고</button>}<br/>
-                    <span>{dayKor}{contentArr.time}</span><br/>
-                    <span>{contentArr.content}</span>
+                    <p className="content__owner">랜선친구 {contentArr.randomId}</p>
+                    <div className="formBtnBox">
+                        {isOwner ? 
+                        <>
+                            <button onClick={toggleEdit} className="formBtn">수정</button>
+                            <button onClick={DeleteContent} className="formBtn">삭제</button>
+                        </> 
+                        : 
+                            <button onClick={toggleReport} className="formBtn">신고</button>
+                        }
+                    </div>
+                    <p className="content__text">{contentArr.content}</p>
+                    <p className="content__time">{dayKor}{contentArr.time}</p>
                     {report ? <Report report={report} /> : ""}
                 </div>
             }

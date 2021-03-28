@@ -3,6 +3,7 @@ import MapCom from "./Map";
 import Weather from "./Weather";
 import Board from "./Board";
 import Basictool from "./Basictool";
+import url from "./assets/dust_bg.jpg";
 
 function App() {
   const [coords, setCoords] = useState("");
