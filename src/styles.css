@@ -72,12 +72,18 @@ form {
   background-color: #999;
 }
 
+.contentWrap {
+  width: 80%;
+  height: 100%;
+}
+
 .contentBox {
   background-color: #fff;
   color: #000;
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 10px;
+  width: 100%;
 }
 
 .formBtnBox {
@@ -106,4 +112,68 @@ form {
 .content__time {
   text-align: right;
   font-size: 0.8rem;
+}
+
+.containerBox {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.bgCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(40, 40, 40, 0.5);
+  z-index: 100;
+}
+
+.boardBox {
+  width: 30vw;
+  height: 36vh;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-top: 20vh;
+  margin-left: 32vw;
+}
+
+.board {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.boardTitle {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: bold;
+  padding: 10px 0 5px 15px;
+  line-height: 2rem;
+}
+
+.boardInput {
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  margin-left: 15px;
+  display: block;
+  width: 90%;
+  height: 60%;
+}
+
+.boardBox .formBtn {
+  display: block;
+  padding: 0 30px;
+  height: 14%;
+  background-color: #aaa;
+  color: #333;
+  margin: 0 auto;
+}
+
+.boardBox .formBtn:hover {
+  padding: 0 25px;
+  height: 13%;
+  margin-top: 0.25%;
 }

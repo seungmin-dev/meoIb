@@ -30,12 +30,14 @@ const Board = ({coords}) => {
     }, []);
     return (
         <div className="container">
-            <div sytle={{marginTop : 30}}>
+            <div sytle={{marginTop : 30}} className="containerBox">
                 <span onClick={onClickCreate} id="btnCreate">{btnCreateValue}</span>
                 {creating ? <Create coords={coords} ip={ip} /> : "" }
-                {content.map(contentArr => 
-                    <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.ip === ip} />
-                )}
+                <div className="contentWrap">
+                    {content.map(contentArr => 
+                        <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.ip === ip} />
+                    )}
+                </div>
                 <span></span>
             </div>
         </div>

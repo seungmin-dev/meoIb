@@ -45,12 +45,15 @@ const Create = ({coords, ip}) => {
         setContent(value);
     }
     return (
-        <div className="boardBox">
-            <form className="board" onSubmit={onSubmit}>
-                <input type="text" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange} className="formInput" />
-                <input type="submit" value="알려주기" className="formBtn" />
-            </form>
-            {/* <button onClick={toggleEditing} className="formBtn cancelBtn">취소</button> */}
+        <div className="bgCover">
+            <div className="boardBox">
+                <form className="board" onSubmit={onSubmit}>
+                    <h3 className="boardTitle">난 오늘 이렇게 입었어!</h3>
+                    <input className="boardInput" type="text" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange} />
+                    <input type="submit" value="알려주기" className="formBtn" />
+                </form>
+                {/* <button onClick={toggleEditing} className="formBtn cancelBtn">취소</button> */}
+            </div>
         </div>
     )
 }
