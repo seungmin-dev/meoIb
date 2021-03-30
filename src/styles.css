@@ -145,6 +145,10 @@ form {
   height: 100%;
 }
 
+.boardIcon {
+  color: #333;
+}
+
 .boardTitle {
   font-size: 1.1rem;
   color: #333;

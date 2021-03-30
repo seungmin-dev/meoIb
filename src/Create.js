@@ -1,10 +1,13 @@
 import { dbService } from "./fbase";
 import React, {useEffect, useState} from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Ip from "./Ip";
 import {userIpApi} from "./api";
 
 const Create = ({coords, ip}) => {
     const [content, setContent] = useState("");
+    const [creating, setCreating] = useState(false);
     // // const [ip, setIp] = useState("");
     // 익명의 ip로 글 쓴 사람 판별(ip 컴포넌트에서 ip값 넘겨오기)
     // 로그인 없이 일단 글 쓸 수 있고
@@ -44,10 +47,15 @@ const Create = ({coords, ip}) => {
         const {target:{value}} = event;
         setContent(value);
     }
+    const iconClick = () => {
+        setCreating(false);
+        console.log('creating: ', creating);
+    }
     return (
         <div className="bgCover">
             <div className="boardBox">
                 <form className="board" onSubmit={onSubmit}>
+                    <FontAwesomeIcon className="boardIcon" icon={faTimes} onClick={() => iconClick()} />
                     <h3 className="boardTitle">난 오늘 이렇게 입었어!</h3>
                     <input className="boardInput" type="text" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange} />
                     <input type="submit" value="알려주기" className="formBtn" />
