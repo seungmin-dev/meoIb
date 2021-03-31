@@ -28,9 +28,9 @@ const Weather = ({coords}) => {
                         <div className="weather_icon_box">
                             <img className="weather_icon" src={`http://openweathermap.org/img/w/${weatherObj.icon}.png`} alt="날씨 아이콘" />
                         </div>
-                        <p>현재 위치-{weatherObj.regieon}</p>
-                        <p>기온-{weatherObj.temp}˚C</p>
-                        <p>체감-{weatherObj.feels_like}˚C</p>
+                        <p className="weatherText">현재 위치 {weatherObj.regieon}</p>
+                        <p className="weatherText">기온 {weatherObj.temp}˚C</p>
+                        <p className="weatherText">체감 {weatherObj.feels_like}˚C</p>
                         {/* <p>날씨-{weatherObj.weather}</p> */}
                     </div>
                 </>

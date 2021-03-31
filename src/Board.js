@@ -31,22 +31,26 @@ const Board = ({coords}) => {
         })
     }, []);
     return (
+        <>
         <div className="container">
             <div className="phoneWrap">
                 <div className="phone" style={{backgroundImage:"url(" + phoneImg + ")"}}></div>
-                <div className="inner__phone" style={{backgroundImage:"url(" + logoImg + ")"}}></div>
+                <div className="inner__phone"></div>
             </div>
-            <div sytle={{marginTop : 30}} className="containerBox">
+            <div sytle={{marginTop : 30}} className="inner__container">
                 <span onClick={onClickCreate} id="btnCreate">{btnCreateValue}</span>
-                {creating ? <Create coords={coords} ip={ip} /> : "" }
                 <div className="contentWrap">
-                    {content.map(contentArr => 
-                        <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.ip === ip} />
-                    )}
+                    <div className="inner__contentWrap">
+                        {content.map(contentArr => 
+                            <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.ip === ip} />
+                        )}
+                    </div>
                 </div>
                 <span></span>
             </div>
         </div>
+        {creating ? <Create coords={coords} ip={ip} /> : "" }
+        </>
     )
 }
 

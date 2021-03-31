@@ -1,10 +1,11 @@
 import React from "react";
+import logoImg from "./assets/meoib_logo.png";
 
 const Basictool = () => {
 
     return (
         <>
-            <div className="logo"><img alt="" src="" id="" /></div>
+            <a href="/" className="logo"><img alt="로고" src={logoImg} id="logo" /></a>
         </>
     )
 }

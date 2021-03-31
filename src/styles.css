@@ -29,6 +29,7 @@ body {
   background-image: url("./assets/dust_bg.jpg");
   background-size: cover;
   background-position: center center;
+  position: relative;
 }
 
 button {
@@ -46,42 +47,80 @@ form {
 }
 
 .logo {
-  background-color: #fff;
-  width: 80px;
-  height: 50px;
-  float: left;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 150px;
+  height: 150px;
+}
+#logo {
+  width: 100%;
+  height: 100%;
+  background-size: 130% auto;
+  background-repeat: no-repeat;
 }
 
 .weather_box {
-  width: 30%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  width: 10%;
   height: 80px;
-  float: right;
 }
 
 .weather_icon_box {
-  width: 60px;
-  height: 60px;
-  float: right;
+  width: 100%;
+  height: 50px;
+}
+
+.weather_icon {
+  display: block;
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.weatherText {
+  line-height: 1.4rem;
+  text-align: center;
 }
 
 .container {
+  position: absolute;
+  top: 10vh;
+  left: 25vw;
   display: flex;
   justify-content: space-between;
-  width: 60vw;
+  width: 50vw;
   height: 70vh;
-  background-color: #999;
 }
 
-.phoneWrap {
+.inner__container {
   position: relative;
   width: 40%;
   height: 100%;
 }
 
+#btnCreate {
+  display: block;
+  width: 100%;
+  height: 20px;
+  text-align: right;
+}
+
+.phoneWrap {
+  position: relative;
+  width: 60%;
+  height: 100%;
+}
+
 .phone {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 0;
+  left: 0px;
   width: 100%;
   height: 100%;
   background-size: auto 100%;
@@ -92,20 +131,28 @@ form {
 
 .inner__phone {
   position: absolute;
-  width: 94%;
-  height: 90%;
+  width: 54%;
+  height: 100%;
   top: 0;
-  left: 0;
+  left: 21%;
   background-color: #000;
   z-index: 1;
-  background-size: 50% auto;
+  background-image: url("./assets/meoib_logo.png");
+  background-size: 80% auto;
   background-position: center;
   background-repeat: no-repeat;
+  border-radius: 50px;
 }
 
 .contentWrap {
-  width: 80%;
-  height: 100%;
+  width: 100%;
+  height: calc(100% - 20px);
+  overflow: hidden;
+}
+
+.inner__contentWrap {
+  width: 100%;
+  height: auto;
 }
 
 .contentBox {
@@ -143,12 +190,6 @@ form {
 .content__time {
   text-align: right;
   font-size: 0.8rem;
-}
-
-.containerBox {
-  position: relative;
-  width: 50%;
-  height: 100%;
 }
 
 .bgCover {
