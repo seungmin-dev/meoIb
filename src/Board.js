@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react"
 import {dbService} from "./fbase";
 import Create from "./Create";
 import Content from "./Content";
+import phoneImg from "./assets/mockup.png";
+import logoImg from "./assets/meoib_logo.png";
 import {userIpApi} from "./api";
 
 const Board = ({coords}) => {
@@ -30,6 +32,10 @@ const Board = ({coords}) => {
     }, []);
     return (
         <div className="container">
+            <div className="phoneWrap">
+                <div className="phone" style={{backgroundImage:"url(" + phoneImg + ")"}}></div>
+                <div className="inner__phone" style={{backgroundImage:"url(" + logoImg + ")"}}></div>
+            </div>
             <div sytle={{marginTop : 30}} className="containerBox">
                 <span onClick={onClickCreate} id="btnCreate">{btnCreateValue}</span>
                 {creating ? <Create coords={coords} ip={ip} /> : "" }
