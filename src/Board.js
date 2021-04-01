@@ -30,6 +30,9 @@ const Board = ({coords}) => {
             setContent(contentArr);
         })
     }, []);
+    const onCreate = (creating) => {
+        console.log('board creating:', creating);
+    }
     return (
         <>
         <div className="container">
@@ -38,7 +41,7 @@ const Board = ({coords}) => {
                 <div className="inner__phone"></div>
             </div>
             <div sytle={{marginTop : 30}} className="inner__container">
-                <span onClick={onClickCreate} id="btnCreate">{btnCreateValue}</span>
+                <span onClick={onClickCreate} id="btnCreate" style={{cursor:'pointer'}}>{btnCreateValue}</span>
                 <div className="contentWrap">
                     <div className="inner__contentWrap">
                         {content.map(contentArr => 
@@ -49,7 +52,7 @@ const Board = ({coords}) => {
                 <span></span>
             </div>
         </div>
-        {creating ? <Create coords={coords} ip={ip} /> : "" }
+        {creating ? <Create coords={coords} ip={ip} onCreate={onCreate} /> : "" }
         </>
     )
 }
