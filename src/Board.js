@@ -10,6 +10,7 @@ const Board = ({coords}) => {
     const [content, setContent] = useState([]);
     const [ip, setIp] = useState("");
     const [creating, setCreating] = useState(false);
+    const [done, setDone] = useState(false);
     let btnCreateValue = "알려주기";
     const onClickCreate = (event) => {
         setCreating(true);
@@ -30,7 +31,7 @@ const Board = ({coords}) => {
             setContent(contentArr);
         })
     }, []);
-    const onCreate = (creating) => {
+    const doneCreate = (creating) => {
         console.log('board creating:', creating);
     }
     return (
@@ -52,7 +53,7 @@ const Board = ({coords}) => {
                 <span></span>
             </div>
         </div>
-        {creating ? <Create coords={coords} ip={ip} onCreate={onCreate} /> : "" }
+        {creating ? <Create coords={coords} ip={ip} onCreate={() => setCreating(false)} /> : "" }
         </>
     )
 }

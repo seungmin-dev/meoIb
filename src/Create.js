@@ -5,14 +5,9 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Ip from "./Ip";
 import {userIpApi} from "./api";
 
-const Create = ({coords, ip}) => {
+const Create = ({coords, ip, onCreate}) => {
     const [content, setContent] = useState("");
     const [creating, setCreating] = useState(false);
-    // // const [ip, setIp] = useState("");
-    // 익명의 ip로 글 쓴 사람 판별(ip 컴포넌트에서 ip값 넘겨오기)
-    // 로그인 없이 일단 글 쓸 수 있고
-    // 해당 글의 아이피와 접속 아이피가 같으면 수정, 삭제 가능
-    // 아니라면 불가능
     <Ip />
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -42,16 +37,12 @@ const Create = ({coords, ip}) => {
 
         await dbService.collection("ㅁㅇㅇㅇ").add(contentObj).then((docRef) => {console.log('docRef id:', docRef.id)});
         setContent("");
+
+        onCreate();
     }
     const onChange = async (event) => {
         const {target:{value}} = event;
         setContent(value);
-    }
-    const setDoneCreate = (props) => {
-        setCreating(false);
-        console.log('creating: ', creating);
-        // doneCreate(creating);
-        console.log('props:',props);
     }
     return (
         <div className="bgCover">
@@ -60,7 +51,7 @@ const Create = ({coords, ip}) => {
                     <FontAwesomeIcon className="boardIcon" icon={faTimes} />
                     <h3 className="boardTitle">난 오늘 이렇게 입었어!</h3>
                     <input className="boardInput" type="text" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange} />
-                    <input type="submit" value="알려주기" className="formBtn btnCreate" onClick={setDoneCreate} />
+                    <input type="submit" value="알려주기" className="formBtn btnCreate" />
                 </form>
                 {/* <button onClick={toggleEditing} className="formBtn cancelBtn">취소</button> */}
             </div>
