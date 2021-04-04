@@ -131,10 +131,10 @@ form {
 
 .inner__phone {
   position: absolute;
-  width: 54%;
+  width: 59%;
   height: 100%;
   top: 0;
-  left: 21%;
+  left: 20%;
   background-color: #000;
   z-index: 1;
   background-image: url("./assets/meoib_logo.png");
