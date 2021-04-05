@@ -48,7 +48,7 @@ const Create = ({coords, ip, onCreate}) => {
         <div className="bgCover">
             <div className="boardBox">
                 <form className="board" onSubmit={onSubmit}>
-                    <FontAwesomeIcon className="boardIcon" icon={faTimes} />
+                    <FontAwesomeIcon className="boardCloseIcon" icon={faTimes} onClick={e => onCreate()} />
                     <h3 className="boardTitle">난 오늘 이렇게 입었어!</h3>
                     <input className="boardInput" type="text" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange} />
                     <input type="submit" value="알려주기" className="formBtn btnCreate" />
