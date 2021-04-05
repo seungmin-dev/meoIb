@@ -25,7 +25,7 @@
     "eject": "react-scripts eject"
   },
   "homepage":"https://seungmin-dev.github.io/meoIb/public/index.html",
-  "PUBLIC_URL":"https://seungmin-dev.github.io/meoIb/public",
+  "PUBLIC_URL":"/",
   "eslintConfig": {
     "extends": [
       "react-app",
