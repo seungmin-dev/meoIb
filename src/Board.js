@@ -31,9 +31,6 @@ const Board = ({coords}) => {
             setContent(contentArr);
         })
     }, []);
-    const doneCreate = (creating) => {
-        console.log('board creating:', creating);
-    }
     return (
         <>
         <div className="container">

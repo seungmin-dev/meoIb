@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import { dbService, storageService } from "./fbase";
 import Report from "./Report";
 
@@ -6,6 +6,9 @@ const Content = ({key, contentArr, isOwner}) => {
     const [editting, setEditting] = useState(false);
     const [newContent, setNewContent] = useState(contentArr.content);
     const [report, setReport] = useState(false);
+    const contentBox = useRef();
+    const reportNum = useRef();
+
     let d = new Date();
     let day = d.getDay();
     let dayKor = "";
@@ -34,9 +37,12 @@ const Content = ({key, contentArr, isOwner}) => {
             await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).delete()
         }
     }
-    const toggleReport = () => {
+    const toReport = () => {
         setReport(true);
     }
+    // if(this.contentBox.reportNum) {
+    //     this.
+    // }
     return (
         <>
             {editting ? (
@@ -49,7 +55,7 @@ const Content = ({key, contentArr, isOwner}) => {
                     </>
                 )
             :
-                <div className="contentBox">
+                <div className="contentBox" ref={contentBox}>
                     <p className="content__owner">랜선친구 {contentArr.randomId}</p>
                     <div className="formBtnBox">
                         {isOwner ? 
@@ -58,12 +64,13 @@ const Content = ({key, contentArr, isOwner}) => {
                             <button onClick={DeleteContent} className="formBtn">삭제</button>
                         </> 
                         : 
-                            <button onClick={toggleReport} className="formBtn">신고</button>
+                            <button onClick={toReport} className="formBtn">신고</button>
                         }
                     </div>
                     <p className="content__text">{contentArr.content}</p>
                     <p className="content__time">{dayKor}{contentArr.time}</p>
-                    {report ? <Report report={report} /> : ""}
+                    <input type="hidden" ref={reportNum} name="reportNum" id="reportNum">{contentArr.report}</input>
+                    {report ? <Report report={report} contentArr={contentArr} onReport={() => setReport(false)} /> : ""}
                 </div>
             }
         </>

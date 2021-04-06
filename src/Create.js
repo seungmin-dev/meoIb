@@ -31,7 +31,8 @@ const Create = ({coords, ip, onCreate}) => {
             time : ampm+" " + hours+"시 "+minutes+"분",
             randomId : Math.floor(Math.random() * 101),
             day : day,
-            dayKor : "오늘"
+            dayKor : "오늘",
+            report : 0
         }
         console.log('contentObj:', contentObj);
 
