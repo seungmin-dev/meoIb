@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react"
-import {dbService} from "./fbase";
+import {dbService, authService} from "./fbase";
 import Create from "./Create";
 import Content from "./Content";
 import phoneImg from "./assets/mockup.png";
+import Authform from "./Authform";
 import logoImg from "./assets/meoib_logo.png";
 import {userIpApi} from "./api";
 
@@ -10,11 +11,20 @@ const Board = ({coords}) => {
     const [content, setContent] = useState([]);
     const [ip, setIp] = useState("");
     const [creating, setCreating] = useState(false);
-    const [done, setDone] = useState(false);
-    let btnCreateValue = "알려주기";
+    const [auth, setAuth] = useState(false);
+
+    console.log('auth : ',auth);
+
     const onClickCreate = (event) => {
         setCreating(true);
-        btnCreateValue = "";
+        console.log('creating : ', creating);
+        if(!auth) { 
+            // 익명으로 로그인되어있지 않을 때
+            //익명으로 로그인
+        console.log('auth : ',auth);
+        } else {
+
+        }
     }
     function json(url) {
         return fetch(url).then(res => res.json());
@@ -39,7 +49,7 @@ const Board = ({coords}) => {
                 <div className="inner__phone"></div>
             </div>
             <div sytle={{marginTop : 30}} className="inner__container">
-                <span onClick={onClickCreate} id="btnCreate" style={{cursor:'pointer'}}>{btnCreateValue}</span>
+                <span onClick={onClickCreate} id="btnCreate" style={{cursor:'pointer'}}>알려주기</span>
                 <div className="contentWrap">
                     <div className="inner__contentWrap">
                         {content.map(contentArr => 
@@ -50,7 +60,9 @@ const Board = ({coords}) => {
                 <span></span>
             </div>
         </div>
-        {creating ? <Create coords={coords} ip={ip} onCreate={() => setCreating(false)} /> : "" }
+        {/* 로그인이 되어있지 않고 '알려주기'버튼을 클릭했을 때 */}
+        {!auth && creating ? <Authform onAuth={()=>setAuth(true)} /> : "" } 
+        {auth && creating ? <Create coords={coords} ip={ip} onCreate={() => setCreating(false)} /> : "" }
         </>
     )
 }
