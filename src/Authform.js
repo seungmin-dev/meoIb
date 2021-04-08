@@ -1,16 +1,17 @@
 import React from "react";
-import {dbService, authService} from "./fbase";
+import {dbService, authService, firebaseInstance} from "./fbase";
 
 const Authform = ({onAuth}) => {
     const onClickAuth = (event) => {
-        event.preventDefault();
-        authService.auth().signInAnonymously()
-        .then(() => {
+        firebaseInstance.auth().signInAnonymously()
+        .then((user) => {
+            console.log('user1 : ',user);
             onAuth();
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
+            console.log('error Message : ',errorMessage);
         });
     }
     return (

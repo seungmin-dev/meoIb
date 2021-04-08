@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import { dbService, storageService } from "./fbase";
 import Report from "./Report";
 
-const Content = ({key, contentArr, isOwner}) => {
+const Content = ({contentArr, isOwner}) => {
     const [editting, setEditting] = useState(false);
     const [newContent, setNewContent] = useState(contentArr.content);
     const [report, setReport] = useState(false);
@@ -69,7 +69,7 @@ const Content = ({key, contentArr, isOwner}) => {
                     </div>
                     <p className="content__text">{contentArr.content}</p>
                     <p className="content__time">{dayKor}{contentArr.time}</p>
-                    <input type="hidden" ref={reportNum} name="reportNum" id="reportNum">{contentArr.report}</input>
+                    <input type="hidden" ref={reportNum} name="reportNum" id="reportNum" value={contentArr.reportNum}></input>
                     {report ? <Report report={report} contentArr={contentArr} onReport={() => setReport(false)} /> : ""}
                 </div>
             }

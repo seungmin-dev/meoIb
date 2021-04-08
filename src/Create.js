@@ -5,7 +5,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Ip from "./Ip";
 import {userIpApi} from "./api";
 
-const Create = ({coords, ip, onCreate}) => {
+const Create = ({coords, user, onCreate}) => {
     const [content, setContent] = useState("");
     const [creating, setCreating] = useState(false);
     <Ip />
@@ -21,9 +21,8 @@ const Create = ({coords, ip, onCreate}) => {
         } else {
             ampm = "오후";
             hours -= 12;
-        }
+        }   
         const contentObj = {
-            ip : ip,
             content : content,
             position : coords,
             // town : "", 지도api로 동네를 알아낼 수 있나..? => 네이버 api는 가넝
@@ -32,7 +31,8 @@ const Create = ({coords, ip, onCreate}) => {
             randomId : Math.floor(Math.random() * 101),
             day : day,
             dayKor : "오늘",
-            report : 0
+            reportNum : 0,
+            uid : user.id
         }
         console.log('contentObj:', contentObj);
 
