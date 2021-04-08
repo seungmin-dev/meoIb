@@ -32,7 +32,7 @@ const Create = ({coords, user, onCreate}) => {
             day : day,
             dayKor : "오늘",
             reportNum : 0,
-            uid : user.id
+            uid : user.uid
         }
         console.log('contentObj:', contentObj);
 
