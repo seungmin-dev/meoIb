@@ -1,17 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { dbService, storageService } from "./fbase";
+import { dbService } from "./fbase";
 
-const Report = ({onReport, contentArr}) => {
+const Report = ({onReport, contentArr, onThreeReport}) => {
+    let [reportNum, setReportNum] = useState(contentArr.reportNum + 1);
     const onClickReport = async () => {
         alert("신고하시겠습니까? 동일 게시물에 3회 이상 신고가 되면 숨김 처리 됩니다.");
-        let currentReportNum = "";
-        // 신고창의 부모창에 hidden 으로 넣어져있는 reportNum 가져와서 ++1;
         await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).update({
-            report : currentReportNum + 1
+            reportNum : reportNum
         });
-        onReport();
+        onReport(); // report 박스 안보이게 설정
+        if(reportNum >= 3) {onThreeReport();}
     }
     return (
         <div className="reportBox">

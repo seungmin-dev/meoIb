@@ -31,7 +31,7 @@ const Create = ({coords, user, onCreate}) => {
             randomId : Math.floor(Math.random() * 101),
             day : day,
             dayKor : "오늘",
-            reportNum : 0,
+            reportNum : Number("0"),
             uid : user.uid
         }
         console.log('contentObj:', contentObj);

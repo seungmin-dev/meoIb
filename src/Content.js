@@ -1,13 +1,12 @@
-import React, {useEffect, useState, useRef} from "react";
-import { dbService, storageService } from "./fbase";
+import React, {useEffect, useState} from "react";
+import { dbService } from "./fbase";
 import Report from "./Report";
 
 const Content = ({contentArr, isOwner}) => {
     const [editting, setEditting] = useState(false);
     const [newContent, setNewContent] = useState(contentArr.content);
-    const [report, setReport] = useState(false);
-    const contentBox = useRef();
-    const reportNum = useRef();
+    const [report, setReport] = useState("");
+    const [visible, setVisible] = useState(false);
 
     let d = new Date();
     let day = d.getDay();
@@ -17,6 +16,11 @@ const Content = ({contentArr, isOwner}) => {
     } else {
         dayKor = "오늘 "
     }
+
+    useEffect(() => {
+        if(contentArr.reportNum >= 3) {setVisible(true);}
+        else {}
+    }, []); 
 
     const onChange = (event) => {
         event.preventDefault();
@@ -37,12 +41,6 @@ const Content = ({contentArr, isOwner}) => {
             await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).delete()
         }
     }
-    const toReport = () => {
-        setReport(true);
-    }
-    // if(this.contentBox.reportNum) {
-    //     this.
-    // }
     return (
         <>
             {editting ? (
@@ -55,7 +53,8 @@ const Content = ({contentArr, isOwner}) => {
                     </>
                 )
             :
-                <div className="contentBox" ref={contentBox}>
+                // visible이 false이면 보여주고 true이면 숨기기
+                (!visible ? <div className="contentBox"> 
                     <p className="content__owner">랜선친구 {contentArr.randomId}</p>
                     <div className="formBtnBox">
                         {isOwner ? 
@@ -64,14 +63,17 @@ const Content = ({contentArr, isOwner}) => {
                             <button onClick={DeleteContent} className="formBtn">삭제</button>
                         </> 
                         : 
-                            <button onClick={toReport} className="formBtn">신고</button>
+                            <button onClick={()=>setReport(true)} className="formBtn">신고</button>
                         }
                     </div>
                     <p className="content__text">{contentArr.content}</p>
                     <p className="content__time">{dayKor}{contentArr.time}</p>
-                    <input type="hidden" ref={reportNum} name="reportNum" id="reportNum" value={contentArr.reportNum}></input>
-                    {report ? <Report report={report} contentArr={contentArr} onReport={() => setReport(false)} /> : ""}
-                </div>
+                    {/* onSaveReport={(reportNum) => setCurrentReportNum(reportNum)}  */}
+                    {report ? <Report report={report} contentArr={contentArr} onReport={() => setReport(false)} onThreeReport={() => setVisible(true)} /> : ""}
+                </div> : 
+                <div className="contentBox">
+                    <h4>해당 게시물은 신고를 3번 이상 받아 숨김처리 되었습니다.</h4>
+                </div>)
             }
         </>
     )

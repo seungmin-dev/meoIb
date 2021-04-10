@@ -20,7 +20,6 @@ const Board = ({coords}) => {
     const {isShowing, toggle} = useModal();
     
     firebaseInstance.auth().onAuthStateChanged((user) => {
-        console.log('use2r : ',user);
         if (user) {
             var uid = user.uid;
             setUser(user);
@@ -34,12 +33,6 @@ const Board = ({coords}) => {
         console.log('auth : ',auth);
         console.log('signOut : ',signOut);
     }
-    // function json(url) {
-    //     return fetch(url).then(res => res.json());
-    // }
-    // json(`https://api.ipdata.co?api-key=1ab80a79ea5f35a9d21e9b64415a3e1a08f30b0118f7f44223247e24`).then(data => {
-    //     setIp(data.ip);
-    // });
     useEffect(() => {
         dbService.collection("ㅁㅇㅇㅇ").onSnapshot((snapshot) => {
             const contentArr = snapshot.docs.map((doc) => ({
@@ -53,6 +46,7 @@ const Board = ({coords}) => {
     const onSignOut = () => {
         firebaseInstance.auth().signOut().then(() => {
             console.log("Sign-out successful.");
+            // window.location.reload(false);
             setAuth(false);
             setSignOut(true);
         }).catch((error) => {
@@ -77,7 +71,7 @@ const Board = ({coords}) => {
                     <div className="inner__contentWrap">
                         {content.map(contentArr => 
                         //  isOwner={contentArr.ip === ip}
-                            <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid} />
+                            <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} />
                         )}
                     </div>
                 </div>
