@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Ip from "./Ip";
 import {userIpApi} from "./api";
+import { Paper } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import TextField from '@material-ui/core/TextField';
 
 const Create = ({coords, user, onCreate}) => {
     const [content, setContent] = useState("");
@@ -47,15 +51,16 @@ const Create = ({coords, user, onCreate}) => {
     }
     return (
         <div className="bgCover">
-            <div className="boardBox">
+            <Paper elevation={3} className="boardBox">
                 <form className="board" onSubmit={onSubmit}>
                     <FontAwesomeIcon className="boardCloseIcon" icon={faTimes} onClick={e => onCreate()} />
                     <h3 className="boardTitle">난 오늘 이렇게 입었어!</h3>
-                    <input className="boardInput" type="text" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange} />
-                    <input type="submit" value="알려주기" className="formBtn btnCreate" />
+                    {/* <input className="boardInput" type="text" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange} /> */}
+                    <TextField className="boardInput" placeholder="오늘 날씨에 맞는 옷차림을 알려주세요!" value={content} required autoFocus onChange={onChange}></TextField>
+                    <Button type="submit" variant="contained" className="btnCreate" endIcon={<Icon>send</Icon>}>알려주기</Button>
                 </form>
+            </Paper>
                 {/* <button onClick={toggleEditing} className="formBtn cancelBtn">취소</button> */}
-            </div>
         </div>
     )
 }
