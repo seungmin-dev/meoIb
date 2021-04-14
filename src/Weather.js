@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {weatherApi} from "./api";
 
-const Weather = ({coords}) => {
+const Weather = ({coords, bgUrl}) => {
     // 위도 경도 apiKey 보내기
     const [api, getApi] = useState(false);
     const [weatherObj, setWeatherObj] = useState(null);
@@ -14,6 +14,8 @@ const Weather = ({coords}) => {
             weather : data.weather[0].main,
             icon : data.weather[0].icon
         });
+        //bgUrl(`./assets/${data.weather[0].icon}.jpg`);
+        bgUrl(`img${data.weather[0].icon}`);
         getApi(true);
     }
     useEffect(() => {

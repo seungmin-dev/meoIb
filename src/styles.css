@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 input {
@@ -26,7 +27,6 @@ body {
 .App {
   width: 100%;
   height: 100%;
-  background-image: url("./assets/dust_bg.jpg");
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -166,6 +166,7 @@ form {
   border-radius: 10px;
   width: 100%;
   position: relative;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .formBtnBox {
@@ -189,11 +190,13 @@ form {
 .content__text {
   padding: 5px;
   line-height: 2rem;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .content__time {
   text-align: right;
   font-size: 0.8rem;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .bgCover {
@@ -239,6 +242,7 @@ form {
   font-weight: bold;
   padding: 10px 0 5px 15px;
   line-height: 2rem;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .boardInput {
@@ -249,6 +253,7 @@ form {
   display: block;
   width: 90%;
   height: 60%;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .boardBox .formBtn {
@@ -282,6 +287,7 @@ form {
   font-size: 1.1rem;
   font-weight: bold;
   text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .reportBox li {

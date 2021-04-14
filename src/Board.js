@@ -6,7 +6,6 @@ import phoneImg from "./assets/mockup.png";
 // import Authform from "./Authform";
 import Modal from "./Modal";
 import useModal from "./UseModal";
-import logoImg from "./assets/meoib_logo.png";
 
 const Board = ({coords}) => {
     const [content, setContent] = useState([]);
@@ -70,7 +69,6 @@ const Board = ({coords}) => {
                 <div className="contentWrap">
                     <div className="inner__contentWrap">
                         {content.map(contentArr => 
-                        //  isOwner={contentArr.ip === ip}
                             <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} />
                         )}
                     </div>
