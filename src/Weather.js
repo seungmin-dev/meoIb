@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {weatherApi} from "./api";
 
-const Weather = ({coords, bgName}) => {
+const Weather = ({coords, bgName, region}) => {
     // 위도 경도 apiKey 보내기
     const [api, getApi] = useState(false);
     const [weatherObj, setWeatherObj] = useState(null);
@@ -30,7 +30,7 @@ const Weather = ({coords, bgName}) => {
                         <div className="weather_icon_box">
                             <img className="weather_icon" src={`http://openweathermap.org/img/w/${weatherObj.icon}.png`} alt="날씨 아이콘" />
                         </div>
-                        <p className="weatherText">현재 위치 {weatherObj.regieon}</p>
+                        <p className="weatherText">현재 위치 {region.address_name}</p>
                         <p className="weatherText">기온 {weatherObj.temp}˚C</p>
                         <p className="weatherText">체감 {weatherObj.feels_like}˚C</p>
                         {/* <p>날씨-{weatherObj.weather}</p> */}

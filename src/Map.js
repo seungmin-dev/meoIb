@@ -2,11 +2,11 @@ import React, {useEffect} from "react";
 const {kakao} = window;
 const geocoder = new kakao.maps.services.Geocoder();
 
-const MapCom = ({coords}) => {
+const MapCom = ({coords, region}) => {
     const getContainer = async () => {
         const container = await document.getElementById("map");
         createMap(coords.lat, coords.lon, container);
-        searchAddrFromCoords(coords.lat, coords.lon, callback);
+        searchAddrFromCoords(coords.lon, coords.lat, callback);
     };
 
     const createMap = (lat, lon, container) => {
@@ -35,7 +35,7 @@ const MapCom = ({coords}) => {
     const callback = (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
             //var infoDiv = document.getElementById('centerAddr');
-    
+            
             for(var i = 0; i < result.length; i++) {
                 // 행정동의 region_type 값은 'H' 이므로
                 if (result[i].region_type === 'H') {
@@ -43,6 +43,7 @@ const MapCom = ({coords}) => {
                     console.log('result : ',result[i].address_name);
                     break;
                 }
+                region(result[1]);
             }
         }   
     }
@@ -50,11 +51,7 @@ const MapCom = ({coords}) => {
         // 주소-좌표 변환 객체를 생성합니다
         //지도 생성 및 객체 리턴
         console.log('searchAddrFromCoords');
-        const geocoderMaker = async (geocoder) => {
-            const result = await geocoder.coord2RegionCode(lat, lon, callback);
-            console.log('result : ',result);
-        }
-        console.log('geocoder : ',geocoder);
+        const result = geocoder.coord2RegionCode(lat, lon, callback);
         // 좌표로 행정동 주소 정보를 요청합니다
         // const result = await (lat, lon, callback) => {
         //     geocoder.coord2RegionCode(lat, lon, callback);  

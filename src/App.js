@@ -14,6 +14,7 @@ function App() {
   const [init, setInit] = useState(false);
   let [bgName, setBgName] = useState("");
   let [bgUrl, setBgUrl] = useState("");
+  let [region, setRegion] = useState("");
   let bgAddr = "";
   useEffect(() => {
     if(bgName != "" ) {
@@ -39,12 +40,13 @@ function App() {
     });
     
   }, []);
+  console.log('region : ',region);
   return (
     <div className="App" style={{backgroundImage:bgUrl}} >
       <>
       <Basictool />
-      {init ?  <MapCom coords={coords} /> : "Can't access geolocation"}
-      {init ?  <Weather coords={coords} bgName={(url) => setBgName(url)} /> : "Can't access geolocation"}
+      {init ?  <MapCom coords={coords} region={(region) => setRegion(region)} /> : "Can't access geolocation"}
+      {init ?  <Weather coords={coords} region={region} bgName={(url) => setBgName(url)} /> : "Can't access geolocation"}
       {init ?  <Board coords={coords} /> : "Can't access geolocation"}
       </>
     </div>
