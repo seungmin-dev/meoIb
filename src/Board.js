@@ -3,10 +3,9 @@ import {dbService, authService, firebaseInstance } from "./fbase";
 import Create from "./Create";
 import Content from "./Content";
 import phoneImg from "./assets/mockup.png";
-// import Authform from "./Authform";
 import Modal from "./Modal";
 import useModal from "./UseModal";
-import { CompassCalibrationOutlined } from "@material-ui/icons";
+const {kakao} = window;
 
 const Board = ({coords}) => {
     const [content, setContent] = useState([]);
@@ -18,6 +17,8 @@ const Board = ({coords}) => {
     const [signOut, setSignOut] = useState(true); // singOut할 때 true
     const {isShowing, toggle} = useModal();
     let [signBtnText, setSignBtnText] = useState("LOG IN");
+    let [distance, setDistance] = useState(false);
+    const [latlon, setLanlon] = useState(coords);
 
     firebaseInstance.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -71,6 +72,46 @@ const Board = ({coords}) => {
             });
         }
     }
+    
+    const getDistance = (conlat, conlon) => {
+        var polyline = new kakao.maps.Polyline({
+            path : [
+                new kakao.maps.LatLng(latlon.lat, latlon.lon),
+                new kakao.maps.LatLng(conlat, conlon)
+            ]
+        });
+        console.log('polyline.getLength():', polyline.getLength());
+        
+        if(polyline.getLength() <= 2000) {
+            setDistance(true)
+        } else if(polyline.getLength() > 2000) {
+            setDistance(false)
+        }
+        //return polyline.getLength();
+        // 내 위치에서 2km 반경에 있는 사람들의 글만 보이게
+    }
+    const updateDistance = async (contentArr, Boolean) => {
+        await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).update({
+            distance : Boolean
+        });
+    }
+    useEffect(() => {
+        content.map(contentArr => {
+            var polyline = new kakao.maps.Polyline({
+                path : [
+                    new kakao.maps.LatLng(latlon.lat, latlon.lon),
+                    new kakao.maps.LatLng(contentArr.position.lat, contentArr.position.lon)
+                ]
+            });
+            console.log('polyline.getLength():', polyline.getLength());
+            
+            if(polyline.getLength() <= 2000) {
+                updateDistance(contentArr, true);
+            } else if(polyline.getLength() > 2000) {
+                updateDistance(contentArr, false);
+            }
+        });
+    }, []);
     return (
         <>
         <div className="container">
@@ -87,8 +128,9 @@ const Board = ({coords}) => {
                 </button>
                 <div className="contentWrap">
                     <div className="inner__contentWrap">
-                        {content.map(contentArr => 
-                            <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} />
+                        {content.map((contentArr) => {
+                                <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} distance={contentArr.distance} /> 
+                            }
                         )}
                     </div>
                 </div>

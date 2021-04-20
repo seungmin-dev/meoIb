@@ -48,15 +48,23 @@ const MapCom = ({coords, region}) => {
         }   
     }
     const searchAddrFromCoords = (lat, lon, callback) => {
-        // 주소-좌표 변환 객체를 생성합니다
-        //지도 생성 및 객체 리턴
-        console.log('searchAddrFromCoords');
-        const result = geocoder.coord2RegionCode(lat, lon, callback);
         // 좌표로 행정동 주소 정보를 요청합니다
-        // const result = await (lat, lon, callback) => {
-        //     geocoder.coord2RegionCode(lat, lon, callback);  
-        // }
+        const result = geocoder.coord2RegionCode(lat, lon, callback);
     };
+    // // 지도에 표시할 원을 생성합니다
+    // const circle = new kakao.maps.Circle({
+    //     center : new kakao.maps.LatLng(33.450701, 126.570667),  // 원의 중심좌표 입니다 
+    //     radius: 2000, // 미터 단위의 원의 반지름입니다 
+    //     // strokeWeight: 5, // 선의 두께입니다 
+    //     // strokeColor: '#75B8FA', // 선의 색깔입니다
+    //     // strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    //     // strokeStyle: 'dashed', // 선의 스타일 입니다
+    //     // fillColor: '#CFE7FF', // 채우기 색깔입니다
+    //     // fillOpacity: 0.7  // 채우기 불투명도 입니다   
+    // }); 
+
+    // // 지도에 원을 표시합니다 
+    // circle.setMap(map); 
 
     useEffect(() => {
         getContainer();

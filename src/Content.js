@@ -7,6 +7,8 @@ const Content = ({contentArr, isOwner}) => {
     const [newContent, setNewContent] = useState(contentArr.content);
     const [report, setReport] = useState("");
     const [visible, setVisible] = useState(false);
+    let [distance, setDistance] = useState(contentArr.distance);
+    console.log('Content distance : ', contentArr.distance);
 
     let d = new Date();
     let day = d.getDay();
@@ -41,7 +43,8 @@ const Content = ({contentArr, isOwner}) => {
             await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).delete()
         }
     }
-    return (
+    return (<>
+        {distance ? (
         <>
             {editting ? (
                     <>
@@ -75,6 +78,8 @@ const Content = ({contentArr, isOwner}) => {
                     <h4>해당 게시물은 신고를 3번 이상 받아 숨김처리 되었습니다.</h4>
                 </div>)
             }
+        </>
+        ) : ""}
         </>
     )
 }
