@@ -72,24 +72,6 @@ const Board = ({coords}) => {
             });
         }
     }
-    
-    const getDistance = (conlat, conlon) => {
-        var polyline = new kakao.maps.Polyline({
-            path : [
-                new kakao.maps.LatLng(latlon.lat, latlon.lon),
-                new kakao.maps.LatLng(conlat, conlon)
-            ]
-        });
-        console.log('polyline.getLength():', polyline.getLength());
-        
-        if(polyline.getLength() <= 2000) {
-            setDistance(true)
-        } else if(polyline.getLength() > 2000) {
-            setDistance(false)
-        }
-        //return polyline.getLength();
-        // 내 위치에서 2km 반경에 있는 사람들의 글만 보이게
-    }
     const updateDistance = async (contentArr, Boolean) => {
         await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).update({
             distance : Boolean
@@ -103,15 +85,15 @@ const Board = ({coords}) => {
                     new kakao.maps.LatLng(contentArr.position.lat, contentArr.position.lon)
                 ]
             });
-            console.log('polyline.getLength():', polyline.getLength());
-            
             if(polyline.getLength() <= 2000) {
                 updateDistance(contentArr, true);
+                console.log('true - ',polyline.getLength());
             } else if(polyline.getLength() > 2000) {
                 updateDistance(contentArr, false);
+                console.log('false - ', polyline.getLength());
             }
         });
-    }, []);
+    }, [creating]);
     return (
         <>
         <div className="container">
@@ -128,9 +110,8 @@ const Board = ({coords}) => {
                 </button>
                 <div className="contentWrap">
                     <div className="inner__contentWrap">
-                        {content.map((contentArr) => {
-                                <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} distance={contentArr.distance} /> 
-                            }
+                        {content.map((contentArr) =>
+                            <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} distance={contentArr.distance} /> 
                         )}
                     </div>
                 </div>

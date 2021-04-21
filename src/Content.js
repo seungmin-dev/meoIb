@@ -7,8 +7,6 @@ const Content = ({contentArr, isOwner}) => {
     const [newContent, setNewContent] = useState(contentArr.content);
     const [report, setReport] = useState("");
     const [visible, setVisible] = useState(false);
-    let [distance, setDistance] = useState(contentArr.distance);
-    console.log('Content distance : ', contentArr.distance);
 
     let d = new Date();
     let day = d.getDay();
@@ -18,6 +16,7 @@ const Content = ({contentArr, isOwner}) => {
     } else {
         dayKor = "오늘 "
     }
+    let distance = contentArr.distance;
 
     useEffect(() => {
         if(contentArr.reportNum >= 3) {setVisible(true);}
@@ -43,6 +42,7 @@ const Content = ({contentArr, isOwner}) => {
             await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).delete()
         }
     }
+    console.log('content distance second : ', distance);
     return (<>
         {distance ? (
         <>
