@@ -9,22 +9,23 @@ const {kakao} = window;
 
 const Board = ({coords}) => {
     const [content, setContent] = useState([]);
-    const [ip, setIp] = useState("");
     const [creating, setCreating] = useState(false);
     const [auth, setAuth] = useState(false);
     const [authInfo, setAuthInfo] = useState("");
     const [user, setUser] = useState("");
-    const [signOut, setSignOut] = useState(true); // singOut할 때 true
+    const [signOut, setSignOut] = useState(true); // singOut할 때 true login되어 있으면 false
     const {isShowing, toggle} = useModal();
     let [signBtnText, setSignBtnText] = useState("LOG IN");
     let [distance, setDistance] = useState(false);
     const [latlon, setLanlon] = useState(coords);
+    const [signBtn, clickSignBtn] = useState(false);
 
     firebaseInstance.auth().onAuthStateChanged((user) => {
         if (user) {
             var uid = user.uid;
             setUser(user);
         } else {
+            setUser("");
         }
     });
 
@@ -44,10 +45,14 @@ const Board = ({coords}) => {
         })
     }, []);
 
-    const onSignOut = () => {
+    useEffect(() => {
+        console.log('signBtn : ',signBtn);
+    }, [signBtn])
+
+    const onClickSignOut = () => {
         console.log('click btn signOut : ',signOut);
         console.log('click btn signBtnText : ',signBtnText);
-        if(signOut === true && signBtnText === "LOG IN") { // 로그아웃 되어있는 상태
+        if(signBtnText === "LOG IN") { // 로그아웃 되어있는 상태
             firebaseInstance.auth().signInAnonymously()
             .then((user) => {
                 console.log('logged in user : ',user);
@@ -60,7 +65,7 @@ const Board = ({coords}) => {
                 var errorMessage = error.message;
                 console.log('error Message : ',errorMessage);
             });
-        } else if(signOut === false && signBtnText === "LOG OUT") { // 로그인 되어있는 상태
+        } else if(signBtnText === "LOG OUT") { // 로그인 되어있는 상태
             firebaseInstance.auth().signOut().then(() => {
                 console.log("Sign-out successful.");
                 // window.location.reload(false);
@@ -72,6 +77,7 @@ const Board = ({coords}) => {
             });
         }
     }
+
     const updateDistance = async (contentArr, Boolean) => {
         await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).update({
             distance : Boolean
@@ -93,7 +99,7 @@ const Board = ({coords}) => {
                 console.log('false - ', polyline.getLength());
             }
         });
-    }, [creating]);
+    }, [latlon]);
     return (
         <>
         <div className="container">
@@ -102,7 +108,7 @@ const Board = ({coords}) => {
                 <div className="inner__phone"></div>
             </div>
             <div sytle={{marginTop : 30}} className="inner__container">
-                <button id="signOutBtn" onClick={onSignOut}>{signBtnText}</button>
+                <button id="signOutBtn" onClick={onClickSignOut}>{signBtnText}</button>
                 <button onClick={toggle} className="button-default">
                     <span onClick={onClickCreate} id="btnCreate" style={{cursor:'pointer'}}>
                     알려주기
@@ -111,7 +117,7 @@ const Board = ({coords}) => {
                 <div className="contentWrap">
                     <div className="inner__contentWrap">
                         {content.map((contentArr) =>
-                            <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} distance={contentArr.distance} /> 
+                            <Content key={contentArr.id} contentArr={contentArr} isOwner={contentArr.uid == user.uid} user={user} distance={contentArr.distance} /> 
                         )}
                     </div>
                 </div>

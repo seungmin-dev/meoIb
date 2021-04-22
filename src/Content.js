@@ -2,12 +2,14 @@ import React, {useEffect, useState} from "react";
 import { dbService } from "./fbase";
 import Report from "./Report";
 
-const Content = ({contentArr, isOwner}) => {
+const Content = ({contentArr, isOwner, user}) => {
     const [editting, setEditting] = useState(false);
     const [newContent, setNewContent] = useState(contentArr.content);
     const [report, setReport] = useState("");
     const [visible, setVisible] = useState(false);
 
+    console.log('isOwner : ',isOwner);
+    console.log('uid : ',user.uid);
     let d = new Date();
     let day = d.getDay();
     let dayKor = "";
@@ -42,7 +44,6 @@ const Content = ({contentArr, isOwner}) => {
             await dbService.doc(`ㅁㅇㅇㅇ/${contentArr.id}`).delete()
         }
     }
-    console.log('content distance second : ', distance);
     return (<>
         {distance ? (
         <>

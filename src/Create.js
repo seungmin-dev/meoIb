@@ -28,6 +28,7 @@ const Create = ({coords, user, onCreate}) => {
         }   
         const contentObj = {
             content : content,
+            distance : true,
             position : coords,
             // town : "", 지도api로 동네를 알아낼 수 있나..? => 네이버 api는 가넝
             timestamp : Date.now(),
