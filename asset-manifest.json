@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/meoIb/static/css/main.51b9ad59.chunk.css",
-    "main.js": "/meoIb/static/js/main.4799533f.chunk.js",
-    "main.js.map": "/meoIb/static/js/main.4799533f.chunk.js.map",
+    "main.js": "/meoIb/static/js/main.cf873968.chunk.js",
+    "main.js.map": "/meoIb/static/js/main.cf873968.chunk.js.map",
     "runtime-main.js": "/meoIb/static/js/runtime-main.af67b36f.js",
     "runtime-main.js.map": "/meoIb/static/js/runtime-main.af67b36f.js.map",
     "static/js/2.759c4889.chunk.js": "/meoIb/static/js/2.759c4889.chunk.js",
@@ -36,6 +36,6 @@
     "static/js/runtime-main.af67b36f.js",
     "static/js/2.759c4889.chunk.js",
     "static/css/main.51b9ad59.chunk.css",
-    "static/js/main.4799533f.chunk.js"
+    "static/js/main.cf873968.chunk.js"
   ]
 }
