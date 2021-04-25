@@ -99,7 +99,7 @@ const Board = ({coords}) => {
                 console.log('false - ', polyline.getLength());
             }
         });
-    }, [latlon]);
+    });
     return (
         <>
         <div className="container">
